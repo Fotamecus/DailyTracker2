@@ -1,0 +1,11 @@
+B:\Repos\DailyTracker2\DailyTracker2\bin\Release\DailyTracker2.exe.config
+B:\Repos\DailyTracker2\DailyTracker2\bin\Release\DailyTracker2.exe
+B:\Repos\DailyTracker2\DailyTracker2\bin\Release\DailyTracker2.pdb
+B:\Repos\DailyTracker2\DailyTracker2\obj\Release\DailyTracker2.csprojAssemblyReference.cache
+B:\Repos\DailyTracker2\DailyTracker2\obj\Release\DailyTracker2.Form1.resources
+B:\Repos\DailyTracker2\DailyTracker2\obj\Release\DailyTracker2.Form2.resources
+B:\Repos\DailyTracker2\DailyTracker2\obj\Release\DailyTracker2.Properties.Resources.resources
+B:\Repos\DailyTracker2\DailyTracker2\obj\Release\DailyTracker2.csproj.GenerateResource.cache
+B:\Repos\DailyTracker2\DailyTracker2\obj\Release\DailyTracker2.csproj.CoreCompileInputs.cache
+B:\Repos\DailyTracker2\DailyTracker2\obj\Release\DailyTracker2.exe
+B:\Repos\DailyTracker2\DailyTracker2\obj\Release\DailyTracker2.pdb
