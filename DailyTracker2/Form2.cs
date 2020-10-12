@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DailyTracker2
@@ -11,15 +11,18 @@ namespace DailyTracker2
     {
         #region properties
 
+        ConfigHandler Handler;
+        RSTaskList currentList;
         string receivedSenderName;
 
         #endregion
 
         #region constructors
 
-        public Form2(object sender)
+        public Form2(object sender, ConfigHandler Handler)
         {
             receivedSenderName = sender.ToString();
+            this.Handler = Handler;
 
             InitializeComponent();
         }
@@ -30,36 +33,21 @@ namespace DailyTracker2
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            StreamReader sr;
+            Text = "Config";
             List<CheckBox> checkboxes = new List<CheckBox>();
 
             switch (receivedSenderName)
             {
                 case "Configure Dailies":
-                    sr = new StreamReader("dailies.txt");
-
-                    using (sr)
-                    {
-                        checkboxes = new List<CheckBox>(GenerateCheckboxes(sr));
-                    }
+                    currentList = Handler.Dailies; //checkboxes = new List<CheckBox>(GenerateCheckboxes(Handler.Dailies));
                     break;
 
                 case "Configure Weeklies":
-                    sr = new StreamReader("weeklies.txt");
-
-                    using (sr)
-                    {
-                        checkboxes = new List<CheckBox>(GenerateCheckboxes(sr));
-                    }
+                    currentList = Handler.Weeklies; //checkboxes = new List<CheckBox>(GenerateCheckboxes(Handler.Weeklies));
                     break;
 
                 case "Configure Monthlies":
-                    sr = new StreamReader("monthlies.txt");
-
-                    using (sr)
-                    {
-                        checkboxes = new List<CheckBox>(GenerateCheckboxes(sr));
-                    }
+                    currentList = Handler.Monthlies; //checkboxes = new List<CheckBox>(GenerateCheckboxes(Handler.Monthlies));
                     break;
 
                 default:
@@ -67,12 +55,34 @@ namespace DailyTracker2
                     break;
             }
 
+            checkboxes = new List<CheckBox>(GenerateCheckboxes(currentList));
             foreach (CheckBox checkbox in checkboxes)
             {
                 Controls.Add(checkbox);
             }
         }
-        private List<CheckBox> GenerateCheckboxes(StreamReader sr)
+
+        private List<CheckBox> GenerateCheckboxes(RSTaskList List)
+        {
+            List<CheckBox> Ret = new List<CheckBox>();
+            for(int i = 0; i < List.Count; i++)
+            {
+                Ret.Add(new CheckBox
+                {
+                    AutoSize = true,
+                    Location = new Point(13, 42 + (24 * i)),
+                    Name = "checkBox" + (i + 1),
+                    Size = new Size(80, 17),
+                    TabIndex = 2,
+                    Text = List[i].Name,
+                    UseVisualStyleBackColor = true,
+                    Checked = List[i].isEnabled
+                });
+            }
+            return Ret;
+        }
+
+        private List<CheckBox> GenerateCheckboxes_StreamReader(StreamReader sr)
         {
             List<CheckBox> resultsList = new List<CheckBox>();
             int count = 0;
@@ -114,7 +124,18 @@ namespace DailyTracker2
 
             return found;
         }
+
         private void WriteConfig()
+        {
+            CheckBox[] checkBoxes = Controls.OfType<CheckBox>().ToArray();
+            for(int i = 0; i < checkBoxes.Length; i++)
+            {
+                currentList[i].isEnabled = checkBoxes[i].Checked;
+            }
+        }
+
+        [Obsolete("This method is obsolete, please use WriteConfig.")]
+        private void WriteConfig_Old()
         {
             List<string> checkedItems = new List<string>();
             List<string> uncheckedItems = new List<string>();
@@ -184,6 +205,7 @@ namespace DailyTracker2
         private void saveButton_Click(object sender, EventArgs e)
         {
             WriteConfig();
+            Handler.SaveMemory("Config.xml");
             Close();
         }
 
