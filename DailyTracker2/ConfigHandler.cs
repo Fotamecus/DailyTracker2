@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace DailyTracker2
 {
-    class ConfigHandler : GSMemory
+    public class ConfigHandler : GSMemory
     {
         public RSTaskList Dailies = new RSTaskList {  };
         public RSTaskList Weeklies = new RSTaskList();
@@ -18,9 +18,22 @@ namespace DailyTracker2
 
         Form1 form;
 
-        public ConfigHandler(Form1 form)
+        public ConfigHandler()
         {
+            
+        }
+
+        public RSTask GetTaskByName(string Name)
+        {
+            return Dailies.Concat(Weeklies).Concat(Monthlies).Where(x => x.Name == Name).FirstOrDefault();
+        }
+
+        public void Init(Form1 form)
+        {
+            Console.Write("Starting ConfigHandler Init...");
             this.form = form;
+            CheckLists();
+            Console.WriteLine(" Done!");
         }
 
         public void CheckLists()
@@ -76,12 +89,12 @@ namespace DailyTracker2
     {
         public TaskType TaskType { get { return taskType; } set { taskType = value; } }
         TaskType taskType;
-        Task taskThread = new Task(null);
+        Task taskThread = null;
         public event EventHandler ListUpdated;
 
         public void RunThread()
         {
-            if(taskThread.Status != TaskStatus.Running)
+            if(taskThread != null && taskThread.Status != TaskStatus.Running)
             {
                 taskThread = new Task(() =>
                 {
@@ -113,12 +126,12 @@ namespace DailyTracker2
 
     public class RSTask
     {
-        internal string Name;
-        public bool isCompleted { get { return completed; } }
-        bool completed;
-        internal DateTime ResetTime;
-        internal int Weight;
-        internal TaskType taskType;
+        public string Name;
+        public bool isCompleted;
+        public bool isEnabled = true;
+        public DateTime ResetTime;
+        public int Weight;
+        public TaskType taskType;
 
         public void Complete(bool isComplete)
         {
@@ -130,7 +143,7 @@ namespace DailyTracker2
             {
                 ResetTime = TimeHelper.GetResetDate(taskType);
             }
-            completed = isComplete;
+            isCompleted = isComplete;
         }
 
         
