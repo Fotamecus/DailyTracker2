@@ -9,3 +9,14 @@ B:\Repos\DailyTracker2\DailyTracker2\obj\Debug\DailyTracker2.exe
 B:\Repos\DailyTracker2\DailyTracker2\obj\Debug\DailyTracker2.pdb
 B:\Repos\DailyTracker2\DailyTracker2\obj\Debug\DailyTracker2.Form1.resources
 B:\Repos\DailyTracker2\DailyTracker2\obj\Debug\DailyTracker2.Form2.resources
+C:\Users\meme\Source\Repos\DailyTracker2\DailyTracker2\bin\Debug\DailyTracker2.exe.config
+C:\Users\meme\Source\Repos\DailyTracker2\DailyTracker2\bin\Debug\DailyTracker2.exe
+C:\Users\meme\Source\Repos\DailyTracker2\DailyTracker2\bin\Debug\DailyTracker2.pdb
+C:\Users\meme\Source\Repos\DailyTracker2\DailyTracker2\obj\Debug\DailyTracker2.csprojAssemblyReference.cache
+C:\Users\meme\Source\Repos\DailyTracker2\DailyTracker2\obj\Debug\DailyTracker2.Form1.resources
+C:\Users\meme\Source\Repos\DailyTracker2\DailyTracker2\obj\Debug\DailyTracker2.Form2.resources
+C:\Users\meme\Source\Repos\DailyTracker2\DailyTracker2\obj\Debug\DailyTracker2.Properties.Resources.resources
+C:\Users\meme\Source\Repos\DailyTracker2\DailyTracker2\obj\Debug\DailyTracker2.csproj.GenerateResource.cache
+C:\Users\meme\Source\Repos\DailyTracker2\DailyTracker2\obj\Debug\DailyTracker2.csproj.CoreCompileInputs.cache
+C:\Users\meme\Source\Repos\DailyTracker2\DailyTracker2\obj\Debug\DailyTracker2.exe
+C:\Users\meme\Source\Repos\DailyTracker2\DailyTracker2\obj\Debug\DailyTracker2.pdb

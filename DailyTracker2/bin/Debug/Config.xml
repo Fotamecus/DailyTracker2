@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<ConfigHandler xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Dailies>
+    <RSTask>
+      <Name>Jack of Trades Aura</Name>
+      <isCompleted>true</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>2020-10-13T00:00:00</ResetTime>
+      <Weight>0</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Divine Location</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>1</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Red Sandstone</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>2</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Crystal Sandstone</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>3</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Wicked Hood</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>4</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+  </Dailies>
+  <Weeklies>
+    <RSTask>
+      <Name>Meg</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>0</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Herby Werby</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>1</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Shattered Worlds Challenges</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>2</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Penguin Hide 'n' Seek</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>3</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Agoroth</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>4</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Rush of Blood</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>5</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Nomad's Elegy Replay</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>6</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Sliske's Endgame Replay</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>7</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Familiarisation</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>8</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Tears of Guthix</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>9</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Kingdom of Miscellania</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>10</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Statue of Dharmarok</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>11</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+  </Weeklies>
+  <Monthlies>
+    <RSTask>
+      <Name>God Statues</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>0</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Giant Oyster</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>1</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Troll Invasion</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>2</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+    <RSTask>
+      <Name>Effigy Incubator</Name>
+      <isCompleted>false</isCompleted>
+      <isEnabled>true</isEnabled>
+      <ResetTime>0001-01-01T00:00:00</ResetTime>
+      <Weight>3</Weight>
+      <taskType>Daily</taskType>
+    </RSTask>
+  </Monthlies>
+</ConfigHandler>
