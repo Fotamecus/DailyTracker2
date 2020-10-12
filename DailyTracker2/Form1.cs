@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DailyTracker2
 {
     public partial class Form1 : Form
     {
+        public ConfigHandler Handler;
+
         #region constructors
 
         public Form1()
@@ -23,12 +26,17 @@ namespace DailyTracker2
             dailyPanel.Visible = false;
             weeklyPanel.Visible = false;
             monthlyPanel.Visible = false;
+            Handler = (ConfigHandler)GSMemoryLoader.LoadMemory("Config.xml", typeof(ConfigHandler));
+            Handler.Init(this);
+            Handler.ListsUpdated += (s, e1) => UpdateLists();
+            ToolTip a = new ToolTip();
+            a.SetToolTip(completeDailiesList, "Rawr!");
             UpdateFormSize();
             UpdateLists();
         }
         private void UpdateFormSize()
         {
-            int runningTotalHeight = 42; // This works for some reason. Don't fuck with it.
+            int runningTotalHeight = Height - ClientSize.Height; //Accounts for form border size
 
             runningTotalHeight += dailyButton.Size.Height;
             if (dailyPanel.Visible)
@@ -49,7 +57,22 @@ namespace DailyTracker2
             Size newSize = new Size(Size.Width, runningTotalHeight);
             Size = newSize;
         }
+
         private void UpdateLists()
+        {
+            basePanel.Controls.OfType<Panel>().SelectMany(x => x.Controls.OfType<ListBox>().ToList()).ToList().ForEach(x => x.Items.Clear());
+
+            FillBoxFromList(Handler.Dailies.Where(x => !x.isCompleted && x.isEnabled).Select(x => x.Name).ToList(), incompleteDailiesList);
+            FillBoxFromList(Handler.Dailies.Where(x => x.isCompleted && x.isEnabled).Select(x => x.Name).ToList(), completeDailiesList);
+            FillBoxFromList(Handler.Weeklies.Where(x => !x.isCompleted && x.isEnabled).Select(x => x.Name).ToList(), incompleteWeekliesList);
+            FillBoxFromList(Handler.Weeklies.Where(x => x.isCompleted && x.isEnabled).Select(x => x.Name).ToList(), completeWeekliesList);
+            FillBoxFromList(Handler.Monthlies.Where(x => !x.isCompleted && x.isEnabled).Select(x => x.Name).ToList(), incompleteMonthliesList);
+            FillBoxFromList(Handler.Monthlies.Where(x => x.isCompleted && x.isEnabled).Select(x => x.Name).ToList(), completeMonthliesList);
+
+            Handler.SaveMemory("Config.xml");
+        }
+        [Obsolete("Method is deprecated, please use UpdateLists instead.")]
+        private void UpdateLists_depricated()
         {
             incompleteDailiesList.Items.Clear();
             incompleteWeekliesList.Items.Clear();
@@ -144,6 +167,7 @@ namespace DailyTracker2
 
             return results;
         }
+        [Obsolete("This method is obsolete, please use ConfigHandler for this instead.")]
         private List<string> PopulateListBox(string type, bool complete)
         {
             List<string> results = new List<string>();
@@ -209,6 +233,13 @@ namespace DailyTracker2
         #endregion
 
         #region event handlers
+        private void List_DoubleClick(object sender, MouseEventArgs e)
+        {
+            RSTask task = Handler.GetTaskByName((sender as ListBox).SelectedItem.ToString());
+            task.Complete(!task.isCompleted);
+            UpdateLists();
+        }
+
 
         private void incompleteDailiesList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -272,81 +303,43 @@ namespace DailyTracker2
 
         private void incompleteDailiesButton_Click(object sender, EventArgs e)
         {
-            foreach (string line in completeDailiesList.Items)
-            {
-                MoveItemToSection(line, "incomplete");
-            }
-
+            Handler.Dailies.ForEach(x => x.Complete(false));
             UpdateLists();
         }
 
         private void incompleteWeekliesButton_Click(object sender, EventArgs e)
         {
-            foreach (string line in completeWeekliesList.Items)
-            {
-                MoveItemToSection(line, "incomplete");
-            }
-
+            Handler.Weeklies.ForEach(x => x.Complete(false));
             UpdateLists();
         }
 
         private void incompleteMonthliesButton_Click(object sender, EventArgs e)
         {
-            foreach (string line in completeMonthliesList.Items)
-            {
-                MoveItemToSection(line, "incomplete");
-            }
-
+            Handler.Monthlies.ForEach(x => x.Complete(false));
             UpdateLists();
         }
 
         private void completeDailiesButton_Click(object sender, EventArgs e)
         {
-            foreach (string line in incompleteDailiesList.Items)
-            {
-                MoveItemToSection(line, "complete");
-            }
-
+            Handler.Dailies.ForEach(x => x.Complete(true));
             UpdateLists();
         }
 
         private void completeWeekliesButton_Click(object sender, EventArgs e)
         {
-            foreach (string line in incompleteWeekliesList.Items)
-            {
-                MoveItemToSection(line, "complete");
-            }
-
+            Handler.Weeklies.ForEach(x => x.Complete(true));
             UpdateLists();
         }
 
         private void completeMonthliesButton_Click(object sender, EventArgs e)
         {
-            foreach (string line in incompleteMonthliesList.Items)
-            {
-                MoveItemToSection(line, "complete");
-            }
-
+            Handler.Monthlies.ForEach(x => x.Complete(true));
             UpdateLists();
         }
 
-        private void configureDailiesMenuItem_Click(object sender, EventArgs e)
+        private void ConfigMenuItem_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2(sender);
-            form2.ShowDialog();
-            UpdateLists();
-        }
-
-        private void configureWeekliesMenuItem_Click(object sender, EventArgs e)
-        {
-            Form2 form2 = new Form2(sender);
-            form2.ShowDialog();
-            UpdateLists();
-        }
-
-        private void configureMonthliesMenuitem_Click(object sender, EventArgs e)
-        {
-            Form2 form2 = new Form2(sender);
+            Form2 form2 = new Form2(sender, Handler);
             form2.ShowDialog();
             UpdateLists();
         }

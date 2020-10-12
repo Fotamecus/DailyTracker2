@@ -106,7 +106,7 @@
             this.completeMonthliesList.Name = "completeMonthliesList";
             this.completeMonthliesList.Size = new System.Drawing.Size(267, 130);
             this.completeMonthliesList.TabIndex = 16;
-            this.completeMonthliesList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.completeMonthliesList_MouseDoubleClick);
+            this.completeMonthliesList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.List_DoubleClick);
             // 
             // incompleteMonthliesList
             // 
@@ -121,7 +121,7 @@
             this.incompleteMonthliesList.Name = "incompleteMonthliesList";
             this.incompleteMonthliesList.Size = new System.Drawing.Size(280, 130);
             this.incompleteMonthliesList.TabIndex = 15;
-            this.incompleteMonthliesList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.incompleteMonthliesList_MouseDoubleClick);
+            this.incompleteMonthliesList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.List_DoubleClick);
             // 
             // label8
             // 
@@ -156,7 +156,7 @@
             // 
             this.monthlyButton.ContextMenuStrip = this.monthliesContextStrip;
             this.monthlyButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.monthlyButton.Font = new System.Drawing.Font("Narkisim", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.monthlyButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.monthlyButton.Location = new System.Drawing.Point(0, 448);
             this.monthlyButton.Name = "monthlyButton";
             this.monthlyButton.Size = new System.Drawing.Size(567, 42);
@@ -177,7 +177,7 @@
             this.configureMonthliesMenuitem.Name = "configureMonthliesMenuitem";
             this.configureMonthliesMenuitem.Size = new System.Drawing.Size(183, 22);
             this.configureMonthliesMenuitem.Text = "Configure Monthlies";
-            this.configureMonthliesMenuitem.Click += new System.EventHandler(this.configureMonthliesMenuitem_Click);
+            this.configureMonthliesMenuitem.Click += new System.EventHandler(this.ConfigMenuItem_Click);
             // 
             // weeklyPanel
             // 
@@ -205,7 +205,7 @@
             this.completeWeekliesList.Name = "completeWeekliesList";
             this.completeWeekliesList.Size = new System.Drawing.Size(267, 148);
             this.completeWeekliesList.TabIndex = 16;
-            this.completeWeekliesList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.completeWeekliesList_MouseDoubleClick);
+            this.completeWeekliesList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.List_DoubleClick);
             // 
             // incompleteWeekliesList
             // 
@@ -220,7 +220,7 @@
             this.incompleteWeekliesList.Name = "incompleteWeekliesList";
             this.incompleteWeekliesList.Size = new System.Drawing.Size(280, 148);
             this.incompleteWeekliesList.TabIndex = 15;
-            this.incompleteWeekliesList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.incompleteWeekliesList_MouseDoubleClick);
+            this.incompleteWeekliesList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.List_DoubleClick);
             // 
             // label7
             // 
@@ -255,7 +255,7 @@
             // 
             this.weeklyButton.ContextMenuStrip = this.weekliesContextStrip;
             this.weeklyButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.weeklyButton.Font = new System.Drawing.Font("Narkisim", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.weeklyButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.weeklyButton.Location = new System.Drawing.Point(0, 214);
             this.weeklyButton.Name = "weeklyButton";
             this.weeklyButton.Size = new System.Drawing.Size(567, 42);
@@ -276,7 +276,7 @@
             this.configureWeekliesMenuItem.Name = "configureWeekliesMenuItem";
             this.configureWeekliesMenuItem.Size = new System.Drawing.Size(176, 22);
             this.configureWeekliesMenuItem.Text = "Configure Weeklies";
-            this.configureWeekliesMenuItem.Click += new System.EventHandler(this.configureWeekliesMenuItem_Click);
+            this.configureWeekliesMenuItem.Click += new System.EventHandler(this.ConfigMenuItem_Click);
             // 
             // dailyPanel
             // 
@@ -304,7 +304,7 @@
             this.completeDailiesList.Name = "completeDailiesList";
             this.completeDailiesList.Size = new System.Drawing.Size(267, 130);
             this.completeDailiesList.TabIndex = 14;
-            this.completeDailiesList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.completeDailiesList_MouseDoubleClick);
+            this.completeDailiesList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.List_DoubleClick);
             // 
             // incompleteDailiesList
             // 
@@ -319,7 +319,7 @@
             this.incompleteDailiesList.Name = "incompleteDailiesList";
             this.incompleteDailiesList.Size = new System.Drawing.Size(280, 130);
             this.incompleteDailiesList.TabIndex = 13;
-            this.incompleteDailiesList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.incompleteDailiesList_MouseDoubleClick);
+            this.incompleteDailiesList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.List_DoubleClick);
             // 
             // label6
             // 
@@ -354,7 +354,7 @@
             // 
             this.dailyButton.ContextMenuStrip = this.dailiesContextStrip;
             this.dailyButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dailyButton.Font = new System.Drawing.Font("Narkisim", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dailyButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dailyButton.Location = new System.Drawing.Point(0, 0);
             this.dailyButton.Name = "dailyButton";
             this.dailyButton.Size = new System.Drawing.Size(567, 42);
@@ -368,14 +368,14 @@
             this.dailiesContextStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.configureDailiesMenuItem});
             this.dailiesContextStrip.Name = "dailiesContextStrip";
-            this.dailiesContextStrip.Size = new System.Drawing.Size(165, 26);
+            this.dailiesContextStrip.Size = new System.Drawing.Size(181, 48);
             // 
             // configureDailiesMenuItem
             // 
             this.configureDailiesMenuItem.Name = "configureDailiesMenuItem";
-            this.configureDailiesMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.configureDailiesMenuItem.Size = new System.Drawing.Size(180, 22);
             this.configureDailiesMenuItem.Text = "Configure Dailies";
-            this.configureDailiesMenuItem.Click += new System.EventHandler(this.configureDailiesMenuItem_Click);
+            this.configureDailiesMenuItem.Click += new System.EventHandler(this.ConfigMenuItem_Click);
             // 
             // Form1
             // 
