@@ -28,6 +28,22 @@ namespace DailyTracker2
 
         #region functions
 
+        private void UpdateFormSize()
+        {
+            int largestHeight = 42; // This works for some reason. Don't fuck with it.
+
+            foreach (Control item in Controls)
+            {
+                if (item.Location.Y + item.Height + 42 > largestHeight)
+                {
+                    largestHeight = item.Location.Y + item.Height + 42;
+                }
+            }
+
+            Size newSize = new Size(Size.Width, largestHeight);
+            Size = newSize;
+        }
+
         private void Form2_Load(object sender, EventArgs e)
         {
             StreamReader sr;
@@ -71,7 +87,10 @@ namespace DailyTracker2
             {
                 Controls.Add(checkbox);
             }
+
+            UpdateFormSize();
         }
+
         private List<CheckBox> GenerateCheckboxes(StreamReader sr)
         {
             List<CheckBox> resultsList = new List<CheckBox>();
@@ -79,14 +98,16 @@ namespace DailyTracker2
 
             while (sr.Peek() >= 0)
             {
-                CheckBox checkBox1 = new CheckBox();
-                checkBox1.AutoSize = true;
-                checkBox1.Location = new Point(13, 42 + (24 * count));
-                checkBox1.Name = "checkBox" + (count + 1);
-                checkBox1.Size = new Size(80, 17);
-                checkBox1.TabIndex = 2;
-                checkBox1.Text = sr.ReadLine();
-                checkBox1.UseVisualStyleBackColor = true;
+                CheckBox checkBox1 = new CheckBox
+                {
+                    AutoSize = true,
+                    Location = new Point(13, 42 + (24 * count)),
+                    Name = "checkBox" + (count + 1),
+                    Size = new Size(80, 17),
+                    TabIndex = 2,
+                    Text = sr.ReadLine(),
+                    UseVisualStyleBackColor = true
+                };
 
                 checkBox1.Checked = ReadConfig(checkBox1.Text);
 
@@ -96,6 +117,7 @@ namespace DailyTracker2
 
             return resultsList;
         }
+
         private bool ReadConfig(string name)
         {
             StreamReader sr = new StreamReader("config.txt");
@@ -114,6 +136,7 @@ namespace DailyTracker2
 
             return found;
         }
+        
         private void WriteConfig()
         {
             List<string> checkedItems = new List<string>();

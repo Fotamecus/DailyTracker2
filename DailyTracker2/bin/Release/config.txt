@@ -1,23 +1,23 @@
+UNIXSTAMP=1603833618
 SECTION=COMPLETE
+Red Sandstone
 Meg
-Kingdom of Miscellania
-Rush of Blood
-Sliske's Endgame Replay
-Herby Werby
-Penguin Hide 'n' Seek
-Shattered Worlds Challenges
-Tears of Guthix
-SECTION=INCOMPLETE
 Effigy Incubator
+SECTION=INCOMPLETE
+God Statues
 Troll Invasion
 Agoroth
+Herby Werby
+Kingdom of Miscellania
+Penguin Hide 'n' Seek
+Rush of Blood
+Shattered Worlds Challenges
+Sliske's Endgame Replay
+Statue of Dharmarok
+Tears of Guthix
+Divine Location
+Wicked Hood
 Familiarisation
 Nomad's Elegy Replay
-Statue of Dharmarok
 Giant Oyster
-God Statues
 Jack of Trades Aura
-Divine Location
-Red Sandstone
-Crystal Sandstone
-Wicked Hood

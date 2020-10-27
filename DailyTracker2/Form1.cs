@@ -8,6 +8,7 @@ namespace DailyTracker2
 {
     public partial class Form1 : Form
     {
+
         #region constructors
 
         public Form1()
@@ -18,6 +19,7 @@ namespace DailyTracker2
         #endregion
 
         #region functions
+
         private void Form1_Load(object sender, EventArgs e)
         {
             dailyPanel.Visible = false;
@@ -25,7 +27,103 @@ namespace DailyTracker2
             monthlyPanel.Visible = false;
             UpdateFormSize();
             UpdateLists();
+            SetupTimer();
         }
+
+        private void SetupTimer()
+        {
+            Timer minuteTimer = new Timer();
+            minuteTimer.Interval = 60000; // 60 seconds
+            minuteTimer.Tick += CheckResetTime;
+            minuteTimer.Start();
+        }
+
+        private void CheckResetTime(object sender, EventArgs e)
+        {
+            DateTime lastUpdated = FetchConfigTimestamp();
+            DateTime now = DateTime.UtcNow;
+
+            if (now.DayOfYear > lastUpdated.DayOfYear || now.Year > lastUpdated.Year)
+            {
+                foreach (string line in completeDailiesList.Items)
+                {
+                    MoveItemToSection(line, "incomplete");
+                }
+
+                DateTime nextWeeklyReset = lastUpdated;
+
+                switch (lastUpdated.DayOfWeek)
+                {
+                    case DayOfWeek.Thursday:
+                        nextWeeklyReset.AddDays(6);
+                        break;
+                    case DayOfWeek.Friday:
+                        nextWeeklyReset.AddDays(5);
+                        break;
+                    case DayOfWeek.Saturday:
+                        nextWeeklyReset.AddDays(4);
+                        break;
+                    case DayOfWeek.Sunday:
+                        nextWeeklyReset.AddDays(3);
+                        break;
+                    case DayOfWeek.Monday:
+                        nextWeeklyReset.AddDays(2);
+                        break;
+                    case DayOfWeek.Tuesday:
+                        nextWeeklyReset.AddDays(1);
+                        break;
+                }
+
+                if (now.DayOfYear > nextWeeklyReset.DayOfYear || now.Year > nextWeeklyReset.Year)
+                {
+                    foreach (string line in completeWeekliesList.Items)
+                    {
+                        MoveItemToSection(line, "incomplete");
+                    }
+                }
+
+                if (now.Month > lastUpdated.Month || now.Year > lastUpdated.Year)
+                {
+                    foreach (string line in completeMonthliesList.Items)
+                    {
+                        MoveItemToSection(line, "incomplete");
+                    }
+                }
+
+                TimeSpan ts = now - new DateTime(1970, 1, 1, 0, 0, 0);
+                WriteConfigTimestamp((long)ts.TotalSeconds);
+
+                UpdateLists();
+            }
+        }
+
+        private void WriteConfigTimestamp(long timestamp)
+        {
+            List<string> configFile = new List<string>(GetConfigFile());
+            configFile[0] = "UNIXSTAMP=" + timestamp;
+            PushToConfigFile(configFile);
+        }
+
+        private DateTime FetchConfigTimestamp()
+        {
+            long unixstamp = new long();
+            string identifier = "UNIXSTAMP=";
+            List<string> configFile = new List<string>(GetConfigFile());
+
+            foreach (string line in configFile)
+            {
+                if (line.StartsWith(identifier))
+                {
+                    unixstamp = long.Parse(line.Substring(identifier.Length));
+                }
+            }
+
+            DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dt = dt.AddSeconds(unixstamp).ToLocalTime();
+
+            return dt;
+        }
+
         private void UpdateFormSize()
         {
             int runningTotalHeight = 42; // This works for some reason. Don't fuck with it.
@@ -49,6 +147,7 @@ namespace DailyTracker2
             Size newSize = new Size(Size.Width, runningTotalHeight);
             Size = newSize;
         }
+
         private void UpdateLists()
         {
             incompleteDailiesList.Items.Clear();
@@ -79,6 +178,7 @@ namespace DailyTracker2
             FillBoxFromList(completeWeeklies, completeWeekliesList);
             FillBoxFromList(completeMonthlies, completeMonthliesList);
         }
+
         private void PushToConfigFile(List<string> newConfigFile)
         {
             string fullText = "";
@@ -93,10 +193,12 @@ namespace DailyTracker2
 
             writeTextFile("config.txt", fullText);
         }
+
         private void writeTextFile(string filePath, string text)
         {
             File.WriteAllText(filePath, text);
         }
+
         private void MoveItemToSection(string item, string section)
         {
             List<string> configFile = GetConfigFile();
@@ -118,6 +220,7 @@ namespace DailyTracker2
 
             PushToConfigFile(configFile);
         }
+
         private void FillBoxFromList(List<string> text, ListBox control)
         {
             foreach (string line in text)
@@ -125,10 +228,12 @@ namespace DailyTracker2
                 control.Items.Add(line);
             }
         }
+
         private List<string> GetConfigFile()
         {
             return GetWholeFile("config.txt");
         }
+
         private List<string> GetWholeFile(string filename)
         {
             List<string> results = new List<string>();
@@ -144,6 +249,7 @@ namespace DailyTracker2
 
             return results;
         }
+
         private List<string> PopulateListBox(string type, bool complete)
         {
             List<string> results = new List<string>();
