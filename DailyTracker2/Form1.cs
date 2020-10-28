@@ -28,6 +28,7 @@ namespace DailyTracker2
             UpdateFormSize();
             UpdateLists();
             SetupTimer();
+            CheckResetTime(this, new EventArgs());
         }
 
         private void SetupTimer()
@@ -89,12 +90,13 @@ namespace DailyTracker2
                         MoveItemToSection(line, "incomplete");
                     }
                 }
-
-                TimeSpan ts = now - new DateTime(1970, 1, 1, 0, 0, 0);
-                WriteConfigTimestamp((long)ts.TotalSeconds);
-
-                UpdateLists();
             }
+
+            TimeSpan ts = now - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            ts = ts - TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now);
+            WriteConfigTimestamp((long)ts.TotalSeconds);
+
+            UpdateLists();
         }
 
         private void WriteConfigTimestamp(long timestamp)

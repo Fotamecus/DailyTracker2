@@ -1,7 +1,5 @@
-UNIXSTAMP=1603794914
+UNIXSTAMP=1603807567
 SECTION=COMPLETE
-Jack of Trades Aura
-Kingdom of Miscellania
 God Statues
 SECTION=INCOMPLETE
 Troll Invasion
@@ -10,14 +8,16 @@ Familiarisation
 Giant Oyster
 Wicked Hood
 Crystal Sandstone
-Red Sandstone
 Penguin Hide 'n' Seek
 Rush of Blood
 Tears of Guthix
-Meg
 Divine Location
 Herby Werby
 Shattered Worlds Challenges
 Sliske's Endgame Replay
 Statue of Dharmarok
 Effigy Incubator
+Jack of Trades Aura
+Kingdom of Miscellania
+Red Sandstone
+Meg
