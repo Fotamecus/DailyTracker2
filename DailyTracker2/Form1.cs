@@ -55,6 +55,9 @@ namespace DailyTracker2
 
                 switch (lastUpdated.DayOfWeek)
                 {
+                    case DayOfWeek.Wednesday:
+                        nextWeeklyReset.AddDays(7);
+                        break;
                     case DayOfWeek.Thursday:
                         nextWeeklyReset.AddDays(6);
                         break;
@@ -75,7 +78,7 @@ namespace DailyTracker2
                         break;
                 }
 
-                if (now.DayOfYear > nextWeeklyReset.DayOfYear || now.Year > nextWeeklyReset.Year)
+                if (now.DayOfYear >= nextWeeklyReset.DayOfYear | (now.DayOfYear < nextWeeklyReset.DayOfYear && now.Year > nextWeeklyReset.Year))
                 {
                     foreach (string line in completeWeekliesList.Items)
                     {

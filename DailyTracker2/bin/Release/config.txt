@@ -1,10 +1,6 @@
-UNIXSTAMP=1603807644
+UNIXSTAMP=1603890422
 SECTION=COMPLETE
-Red Sandstone
-Meg
 Effigy Incubator
-Kingdom of Miscellania
-Penguin Hide 'n' Seek
 SECTION=INCOMPLETE
 God Statues
 Troll Invasion
@@ -21,3 +17,7 @@ Familiarisation
 Nomad's Elegy Replay
 Giant Oyster
 Jack of Trades Aura
+Red Sandstone
+Kingdom of Miscellania
+Meg
+Penguin Hide 'n' Seek
