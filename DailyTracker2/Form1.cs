@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DailyTracker2
@@ -51,34 +52,40 @@ namespace DailyTracker2
                     MoveItemToSection(line, "incomplete");
                 }
 
-                DateTime nextWeeklyReset = lastUpdated;
+                int nextWeeklyResetDayOfYear = lastUpdated.DayOfYear;
+                int currentDayOfYear = now.DayOfYear;
 
                 switch (lastUpdated.DayOfWeek)
                 {
                     case DayOfWeek.Wednesday:
-                        nextWeeklyReset.AddDays(7);
+                        nextWeeklyResetDayOfYear += 7;
                         break;
                     case DayOfWeek.Thursday:
-                        nextWeeklyReset.AddDays(6);
+                        nextWeeklyResetDayOfYear += 6;
                         break;
                     case DayOfWeek.Friday:
-                        nextWeeklyReset.AddDays(5);
+                        nextWeeklyResetDayOfYear += 5;
                         break;
                     case DayOfWeek.Saturday:
-                        nextWeeklyReset.AddDays(4);
+                        nextWeeklyResetDayOfYear += 4;
                         break;
                     case DayOfWeek.Sunday:
-                        nextWeeklyReset.AddDays(3);
+                        nextWeeklyResetDayOfYear += 3;
                         break;
                     case DayOfWeek.Monday:
-                        nextWeeklyReset.AddDays(2);
+                        nextWeeklyResetDayOfYear += 2;
                         break;
                     case DayOfWeek.Tuesday:
-                        nextWeeklyReset.AddDays(1);
+                        nextWeeklyResetDayOfYear += 1;
                         break;
                 }
 
-                if (now.DayOfYear >= nextWeeklyReset.DayOfYear | (now.DayOfYear < nextWeeklyReset.DayOfYear && now.Year > nextWeeklyReset.Year))
+                if (now.Year != lastUpdated.Year)
+                {
+                    currentDayOfYear += 365 * (now.Year - lastUpdated.Year); // Might get a bit weird around leap years?
+                }
+                
+                if (currentDayOfYear >= nextWeeklyResetDayOfYear)
                 {
                     foreach (string line in completeWeekliesList.Items)
                     {
@@ -96,7 +103,7 @@ namespace DailyTracker2
             }
 
             TimeSpan ts = now - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            ts = ts - TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now);
+            ts -= TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now);
             WriteConfigTimestamp((long)ts.TotalSeconds);
 
             UpdateLists();
@@ -115,12 +122,9 @@ namespace DailyTracker2
             string identifier = "UNIXSTAMP=";
             List<string> configFile = new List<string>(GetConfigFile());
 
-            foreach (string line in configFile)
+            foreach (var line in configFile.Where(line => line.StartsWith(identifier)))
             {
-                if (line.StartsWith(identifier))
-                {
-                    unixstamp = long.Parse(line.Substring(identifier.Length));
-                }
+                unixstamp = long.Parse(line.Substring(identifier.Length));
             }
 
             DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
